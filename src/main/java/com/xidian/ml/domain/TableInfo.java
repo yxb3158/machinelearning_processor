@@ -19,6 +19,10 @@ public class TableInfo {
      * 表中的列
      */
     private List<ColumnInfo> columnsInfo;
+    /**
+     * 表的
+     */
+    private String comment;
 
     public String getName() {
         return name;
@@ -44,12 +48,21 @@ public class TableInfo {
         this.columnsInfo = columnsInfo;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "TableInfo{" +
                 "space='" + space + '\'' +
                 ", name='" + name + '\'' +
                 ", columnsInfo=" + columnsInfo +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }

@@ -104,7 +104,7 @@ public class JDBCTemplate {
         DatabaseMetaData dmd = conn.getMetaData();
 //        System.out.println("dmd="+ dmd);
         //获取库中的所有表
-        ResultSet rsTables = dmd.getTables(null, null, null, new String[]{"TABLE"});
+        ResultSet rsTables = dmd.getTables(null, null, null, new String[]{"TABLE","VIEW"});
 //        System.out.println("rsTables="+rsTables);
         List<TableInfo> tables = new ArrayList<TableInfo>();
         //将表存到list中
@@ -114,6 +114,8 @@ public class JDBCTemplate {
             //获取表名称
             String tbName = rsTables.getString("TABLE_NAME");
             tb.setName(tbName);
+            String remarks = rsTables.getString("REMARKS");
+            tb.setComment(remarks);
             //获取表中的字段及其类型
             List<ColumnInfo> cols = getColumns(tbName);
             tb.setColumnsInfo(cols);
