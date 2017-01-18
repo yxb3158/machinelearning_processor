@@ -4,7 +4,7 @@
     <groupId>com.xidian.ml</groupId>
     <artifactId>machinelearning_processor</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <java-version>1.7</java-version>
