@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface StudentDao {
-    static final Logger loggr = LoggerFactory.getLogger(StudentDao.class);
     public static final String SELECT_KEY = "id,name,age";
     public static final String INSERT_KEY = "name,age";
     public static final String INSERT_VALUES = "#{name},#{age}";
