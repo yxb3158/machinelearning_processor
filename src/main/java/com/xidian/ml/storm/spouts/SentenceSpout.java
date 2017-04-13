@@ -1,5 +1,6 @@
 package com.xidian.ml.storm.spouts;
 
+import org.apache.storm.shade.org.jboss.netty.util.internal.ConcurrentHashMap;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -9,11 +10,13 @@ import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.Utils;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by yxb on 17/1/8.
  */
 public class SentenceSpout extends BaseRichSpout {
+    private ConcurrentHashMap<UUID, Values> pending;
     private SpoutOutputCollector spoutOutputCollector;
     private int index = 0;
     //为了简单,定义一个静态数据模拟不断的数据流产生
@@ -34,17 +37,31 @@ public class SentenceSpout extends BaseRichSpout {
     @Override
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
         this.spoutOutputCollector = spoutOutputCollector;
+        this.pending = new ConcurrentHashMap<UUID, Values>();
 
     }
 
     //核心逻辑
     @Override
     public void nextTuple() {
-        spoutOutputCollector.emit(new Values(sentences[index]));
+        Values values = new Values(sentences[index]);
+        UUID msgId = UUID.randomUUID();
+        this.pending.put(msgId, values);
+        spoutOutputCollector.emit(values, msgId);
         ++index;
         if (index >= sentences.length) {
             index = 0;
         }
         Utils.sleep(10000);
+    }
+
+    @Override
+    public void ack(Object msgId) {
+        this.pending.remove(msgId);
+    }
+
+    @Override
+    public void fail(Object msgId) {
+        spoutOutputCollector.emit(this.pending.get(msgId), msgId);
     }
 }
