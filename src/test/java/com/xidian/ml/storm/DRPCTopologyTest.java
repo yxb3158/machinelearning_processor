@@ -1,9 +1,9 @@
 package com.xidian.ml.storm;
 
-import com.xidian.ml.storm.bolts.AdderBolt;
-import com.xidian.ml.storm.bolts.WordCounter;
-import com.xidian.ml.storm.bolts.WordNormalizer;
-import com.xidian.ml.storm.spouts.WordReader;
+import com.xidian.ml.storm.other.AdderBolt;
+import com.xidian.ml.storm.other.WordCounter;
+import com.xidian.ml.storm.other.WordNormalizer;
+import com.xidian.ml.storm.other.WordReader;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.LocalDRPC;

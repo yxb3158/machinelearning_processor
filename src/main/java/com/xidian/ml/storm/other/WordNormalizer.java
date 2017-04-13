@@ -1,4 +1,4 @@
-package com.xidian.ml.storm.bolts;
+package com.xidian.ml.storm.other;
 
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;

@@ -1,5 +1,6 @@
 package com.xidian.ml.storm.bolts;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -29,9 +30,12 @@ public class ReportBolt extends BaseRichBolt {
     public void execute(Tuple tuple) {
         String word = tuple.getStringByField("word");
         Long count = tuple.getLongByField("count");
-        counts.put(word, count);
-        //打印更新后的结果
-        printReport();
+        logger.info("ReportBolt==================="+ JSON.toJSONString(tuple));
+        logger.info("-----------------begin at"+System.currentTimeMillis()+"------------------");
+        logger.info("@report-bolt@: " + word + " ---> " + count);
+//        counts.put(word, count);
+//        //打印更新后的结果
+//        printReport();
 
     }
 

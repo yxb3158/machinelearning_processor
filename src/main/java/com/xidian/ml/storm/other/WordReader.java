@@ -1,4 +1,4 @@
-package com.xidian.ml.storm.spouts;
+package com.xidian.ml.storm.other;
 
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;

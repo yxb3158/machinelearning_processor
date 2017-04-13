@@ -38,16 +38,16 @@ public class WordCountTopology {
         TopologyBuilder topologyBuilder = new TopologyBuilder();
 
         //配置第一个组件sentenceSpout
-        topologyBuilder.setSpout(SENTENCE_SPOUT_ID, sentenceSpout, 2);
+        topologyBuilder.setSpout(SENTENCE_SPOUT_ID, sentenceSpout, 1);
 
         //配置第二个组件splitSentenceBolt,上游为sentenceSpout,tuple分组方式为随机分组shuffleGrouping
-        topologyBuilder.setBolt(SPLIT_SENTENCE_BOLT_ID, splitSentenceBolt).shuffleGrouping(SENTENCE_SPOUT_ID);
+        topologyBuilder.setBolt(SPLIT_SENTENCE_BOLT_ID, splitSentenceBolt,1).shuffleGrouping(SENTENCE_SPOUT_ID);
 
         //配置第三个组件wordCountBolt,上游为splitSentenceBolt,tuple分组方式为fieldsGrouping,同一个单词将进入同一个task中(bolt实例)
-        topologyBuilder.setBolt(WORD_COUNT_BOLT_ID, wordCountBolt).fieldsGrouping(SPLIT_SENTENCE_BOLT_ID, new Fields("word"));
+        topologyBuilder.setBolt(WORD_COUNT_BOLT_ID, wordCountBolt,1).fieldsGrouping(SPLIT_SENTENCE_BOLT_ID, new Fields("word"));
 
         //配置最后一个组件reportBolt,上游为wordCountBolt,tuple分组方式为globalGrouping,即所有的tuple都进入这一个task中
-        topologyBuilder.setBolt(REPORT_BOLT_ID, reportBolt).globalGrouping(WORD_COUNT_BOLT_ID);
+        topologyBuilder.setBolt(REPORT_BOLT_ID, reportBolt,1).globalGrouping(WORD_COUNT_BOLT_ID);
 
         Config config = new Config();
 

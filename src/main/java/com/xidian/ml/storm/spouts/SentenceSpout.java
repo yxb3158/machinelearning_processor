@@ -27,7 +27,7 @@ public class SentenceSpout extends BaseRichSpout {
     //向下游输出
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("sentences"));
+        outputFieldsDeclarer.declare(new Fields("sentence"));
     }
 
     //初始化操作

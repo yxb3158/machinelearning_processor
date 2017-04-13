@@ -33,7 +33,8 @@ public class WordCountBolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple tuple) {
-        String word = tuple.getStringByField("word");
+//        String word = tuple.getStringByField("word");
+        String word = (String) tuple.getValue(0);
         Long count = wordCount.get(word);
         if (count == null) {
             count = 0L;
