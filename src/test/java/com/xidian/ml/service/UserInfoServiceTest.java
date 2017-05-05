@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Random;
+
 /**
  * Created by yxb on 16/12/23.
  */
@@ -31,10 +33,26 @@ public class UserInfoServiceTest {
 
     @Test
     public void saveTest() {
+//        for(int i=0;i<10;i++){
         Student user = new Student();
-        user.setName("haha");
-        user.setAge(123456);
+        String name = RandomString(10000);
+        user.setName(name);
+        System.out.println("name=" + name);
+        user.setAge(10000);
         userInfoService.save(user);
+//        }
+    }
+
+    private String RandomString(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int maxIndex = str.length();
+        Random random = new Random();
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int num = random.nextInt(maxIndex);
+            buf.append(str.charAt(num));
+        }
+        return buf.toString();
     }
 
 
