@@ -35,5 +35,11 @@ public class ListCollectionTest {
 
     }
 
+    @Test
+    public void test2() {
+        List<Integer> list = Lists.newArrayList(1,null);
+        System.out.println(list);
+    }
+
 
 }
