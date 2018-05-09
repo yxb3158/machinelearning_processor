@@ -1,5 +1,6 @@
 package com.xidian.ml.java.baseKnowledge;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.junit.Test;
@@ -83,6 +84,13 @@ public class MapCollectionTest {
 
         System.out.println("wse3=" + streamingPoiDataMap);
 
+    }
+
+    @Test
+    public void test4() {
+        Map<String, String> streamingPoiDataMap = Maps.newHashMap();
+        streamingPoiDataMap.put("poi_sort_offline_svr_hour", "6");
+        System.out.println(JSON.toJSONString(streamingPoiDataMap));
     }
 
 }

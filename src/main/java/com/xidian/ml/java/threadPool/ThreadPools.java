@@ -54,10 +54,10 @@ public abstract class ThreadPools {
         }
     }
 
-    private void releaseThreadPool() {
+    public void releaseThreadPool() {
         if (baseThreadPool != null) {
             int waitTimes = 0;
-            int eachTimes = 50;
+            int eachTimes = 5000;
             while (runningPageCount.get() > 0) {
                 threadSleep(eachTimes);
                 waitTimes += eachTimes;
@@ -91,6 +91,11 @@ public abstract class ThreadPools {
         }
     }
 
+    public void shutdownNow() {
+        baseThreadPool.shutdownNow();
+    }
+
+
     class CommonWorkThread implements Runnable {
         Callable<Boolean> work = null;
 
@@ -119,10 +124,7 @@ public abstract class ThreadPools {
                 runningPageCount.addAndGet(-1);
             }
         }
-
-
     }
-
 
 
     /**
@@ -170,7 +172,6 @@ public abstract class ThreadPools {
             }
         }
     }
-
 
     protected abstract Integer getMccThreadCount();
 

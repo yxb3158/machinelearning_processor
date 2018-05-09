@@ -37,6 +37,8 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!-- 配置mybatis配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
     <!-- mybatis.spring自动映射 -->
@@ -47,4 +49,5 @@
     <!-- 自动扫描，多个包以 逗号分隔 -->
     <context:component-scan base-package="com.xidian.ml.dao"/>
     <aop:aspectj-autoproxy/>
+
 </beans>
